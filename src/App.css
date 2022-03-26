@@ -143,7 +143,7 @@ table td {
   justify-content: center;
   text-align: center;
   display: flex;
-  
+
 }
 table {
   align-items: center;
@@ -152,4 +152,5 @@ table {
   top: 0;
   bottom: 0;
   z-index: 50;
+  margin-top:50px;
 }
