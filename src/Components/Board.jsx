@@ -2,18 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react';
 
-
-
-export default function Board(props) {
-
-    //default values
-    const [turn,setTurn] = useState('x');
-    const [squares,setSquares] = useState(Array(9).fill(null));
-    const [winner,setWinner] = useState();
-    //finding the winner
-    const checkForWinner = (cells)=>{
-	    //every function call combos creating again.
-        const combos = {
+//defining the situations for winner
+//factory pattern--design patterns
+const combos = {
             accros:[
                 [0,1,2],
                 [3,4,5],
@@ -30,19 +21,27 @@ export default function Board(props) {
                 [2,4,6],
             ],
         };
+//defining standarts
+ const NUMBER_OF_AREA = 9;
+export default function Board(props) {
+
+    //default values
+   
+    const [turn,setTurn] = useState('x');
+    const [squares,setSquares] = useState(Array(NUMBER_OF_AREA).fill(null)); //magic string, magic number
+    const [winner,setWinner] = useState();
+    //finding the winner
+	
+    const checkForWinner = (cells)=>{
+	    //every function call combos creating again.
+       
         for (var combo in combos){
             combos[combo].forEach((pattern)=>{
               
                 if(
-                    cells[pattern[0]] === '' ||
-                    cells[pattern[1]] === '' ||
-                    cells[pattern[2]] === '' 
-                ){
-                    //do nothing
-                }else if(
-                    cells[pattern[0]] === cells[pattern[1]] &&
-                    cells[pattern[1]] === cells[pattern[2]] 
-                ){
+                    cells[pattern[0]] === cells[pattern[1]] && cells[pattern[1]] === cells[pattern[2]] 
+                )
+		{
                     setWinner(cells[pattern[0]]);
                     console.log(cells[pattern[0]])
                 }
@@ -62,8 +61,9 @@ export default function Board(props) {
         }
         let cells = [...squares];
        //alert(num);
+	    //change this if with ternary operator ? :
        if (turn === 'x') {
-           cells[num] = 'x';
+           cells[num] = 'x'; //set turn içine cellsnum verecek şekilde
            setTurn('o');
        } else {
            cells[num] = 'o';
@@ -80,7 +80,7 @@ export default function Board(props) {
     
 	const handleRestart = () => {
 		setWinner(null);
-		setSquares(Array(9).fill(null));
+		setSquares(Array(NUMBER_OF_AREA).fill(null));
 	};
     
 
