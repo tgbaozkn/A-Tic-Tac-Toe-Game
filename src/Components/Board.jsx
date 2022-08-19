@@ -12,7 +12,8 @@ export default function Board(props) {
     const [winner,setWinner] = useState();
     //finding the winner
     const checkForWinner = (cells)=>{
-        let combos = {
+	    //every function call combos creating again.
+        const combos = {
             accros:[
                 [0,1,2],
                 [3,4,5],
